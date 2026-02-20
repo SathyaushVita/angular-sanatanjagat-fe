@@ -1,0 +1,208 @@
+
+
+  <section class="header-m">
+    <div class="container-fluid mt-5 mt-5 pt-3 pr-4 pb-2 pl-5">
+      <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+      type="ball-spin-clockwise">
+    </ngx-spinner>
+      <div class="row mt-5">
+
+        <div class="col-md-3 col-lg-3 col-xl-2 mt-3 custom-padding">
+
+
+
+          <div *ngIf="nodes && nodes.length > 0" style="height: 280px;">
+            <div class="card shadow-sm" style="height: 100%; overflow-y: auto;">
+              <div class="card-header" style="background: linear-gradient(to right, #ff5500, #FF8c00); color: white;">
+                <h6 class="mb-0" style="font-size: 20px;">Categories Filters</h6>
+              </div>
+              <div class="d-flex align-items-center mt-3" >
+                <span class="bullet me-2">&#10146;</span>
+                <span style="color: red;">{{ individualcategeory.name }}</span>
+              </div>
+
+
+              <div class="card-body">
+                <nz-tree
+                  [nzData]="nodes"
+                  [nzSearchValue]="searchValue"
+                  (nzClick)="onCategoryClick($event)"
+                  nzBlockNode
+                ></nz-tree>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div *ngIf="nodes && nodes.length > 0; else noData">
+            <nz-tree
+              [nzData]="nodes"
+              [nzSearchValue]="searchValue"
+              (nzClick)="onCategoryClick($event)"
+              nzBlockNode
+            ></nz-tree>
+          </div>
+
+          <ng-template #noData></ng-template>  -->
+
+
+          <div class="pt-3">
+            <div class="card shadow-sm">
+              <div class="card-header text-white" style="background: linear-gradient(to right, #ff5500, #FF8c00); color: white;">
+                <h6 class="mb-0">Location Filters</h6>
+              </div>
+              <div class="card-body">
+
+
+
+                <form [formGroup]="validatorForm">
+                  <div class="mb-3">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a continent">
+                        <nz-select formControlName="continent" nzPlaceHolder="Select Continent" nzNotFoundContent="No data found" [nzShowSearch]="true">
+                          <nz-option *ngFor="let option of ContinentOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div class="mb-3">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a Country">
+                        <nz-select formControlName="country" nzPlaceHolder="Select Country" nzNotFoundContent="No data found" [nzShowSearch]="true">
+                          <nz-option *ngFor="let option of CountryOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div class="mb-3">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a State">
+                        <nz-select formControlName="state" nzPlaceHolder="Select State" nzNotFoundContent="No data found" [nzShowSearch]="true">
+                          <nz-option *ngFor="let option of StateOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div class="mb-3">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a District">
+                        <nz-select formControlName="district" nzPlaceHolder="Select District" nzNotFoundContent="No data found" [nzShowSearch]="true">
+                          <nz-option *ngFor="let option of DistrictOptions" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div class="text-center">
+                    <button (click)="onReset()" type="button" class="btn btn-primary px-4 text-white" style="background-color: orange; border-color: orange;">Reset</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+
+
+        <div class="col-md-6 col-lg-7 col-xl-8 mt-3 hide-scrollbar" style="overflow-y: scroll; height: 80vh;">
+            <section>
+              <div>
+                <div class="card mt-3">
+                  <div class="row no-gutters">
+                    <div class="col-md-4 text-center">
+                      <img [src]="(orginazationCategorydata && orginazationCategorydata && orginazationCategorydata.image) ?
+                              orginazationCategorydata.image :
+                             '../../assets/images/training.png'"
+                       alt="image"
+                       class="responsive-img p-2"
+                       >
+                    </div>
+                    <div class="col-md-8 d-flex flex-column justify-content-center p-3">
+                      <h4 class="card-title mb-2" style="font-size: 24px; color: #ff4500;">
+                        <b>{{ orginazationCategorydata?.name || 'Training' }} </b>
+                      </h4>
+                      <p class="card-text" style="font-size: 18px;">
+                        {{ orginazationCategorydata?.desc }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="container text-end mt-3">
+
+                  <button (click)="navigateTo('add-training')" nz-button class="login-form-button login-form-margin"
+                     style="background-color: orange; border-color: orange;border-radius: 5px;">
+                     <i class="fas fa-user faicon"></i>
+                     Add Training Programme
+                  </button>
+                  <!-- <div class="d-flex align-items-center justify-content-center gap-3 mb-5"> -->
+                    <!-- <button class="btn btn-light" style="font-size: 20px;">
+                      <i class="fas fa-share-alt"></i>
+                    </button> -->
+                  <!-- </div> -->
+                </div>
+
+
+           <div class="container card mt-3 ">
+                  <div class="slider-div">
+                    <ng-container *ngIf="organizations && organizations.length > 0; else noData">
+                      <div class="row mt-3 g-1">
+                        <div *ngFor="let organization of organizations" class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-4">
+                          <div class="image-container text-center">
+                            <a (click)="navigateorganizationDetail(organization._id)">
+                              <img
+                              [src]="organization.image && organization.image !== 'null'
+                                     ?  organization.image
+                                     : '../../assets/images/training.png'"
+                              style="height: 20vh; width: 100%; max-width: 200px; border-radius: 20px;"
+                              class="img-fluid img-thumbnail "
+                              alt="image">
+                            </a>
+                            <p class="my-2 text-truncate" style="font-size: 14px;">{{ organization.name }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+
+
+
+              </div>
+
+              <ng-template #noData>
+                <div class="row text-center">
+                  <div class="col">
+                    <img src="../../assets/images/not _found.jpg" alt="No Data" class="img-fluid" style="width: 30%;" />
+                  </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col">
+                    <p>No Data Found</p>
+                  </div>
+                </div>
+              </ng-template>
+            </section>
+          </div>
+
+
+
+
+
+        <div class="col-md-3 col-lg-2 mt-5 d-none d-md-block">
+          <div class="image-container"  style="position: relative;">
+            <img src="../../assets/images/saynotoplastic.webp"
+                 class="img-fluid"
+                 style="height: 600px; width: 100%; object-fit: fill;"
+                 alt="Ad Space"
+                 id="banner-image">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>

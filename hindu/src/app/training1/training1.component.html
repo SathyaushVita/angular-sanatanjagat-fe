@@ -1,0 +1,191 @@
+<section class="header-m">
+  <div class="container-fluid mt-5 mt-5 pt-3 pr-4 pb-2 pl-5">
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+    type="ball-spin-clockwise">
+  </ngx-spinner>
+    <div class="row mt-3">
+
+      <div class="col-md-3 col-lg-3 col-xl-2 mt-3 custom-padding">
+        <div style="height: 100%;">
+          <div class="card shadow-sm" style="height: 100%; overflow-y: auto;">
+            <div class="card-header" style="background: linear-gradient(to right, #ff5500, #FF8c00); color: white;">
+              <h6 class="mb-0" style="font-size: 20px;">Categories Filters</h6>
+            </div>
+            <div class="card-body">
+
+          <nz-tree
+          [nzData]="nodes"
+          [nzSearchValue]="searchValue"
+          (nzClick)="onCategoryClick($event)"
+          nzBlockNode
+        ></nz-tree>
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+
+      <div class="col-md-6 col-lg-7 col-xl-8 mt-3 hide-scrollbar" style="overflow-y: scroll; height: 80vh;">
+        <section>
+          <div>
+            <div class="card mt-3">
+              <div class="row no-gutters">
+                <div class="col-md-4 text-center">
+                  <a >
+
+                    <img [src]="(orginazationCategorydata && orginazationCategorydata && orginazationCategorydata.image) ?
+                    orginazationCategorydata.image :
+                   '../../assets/images/training.png'"
+
+             class="responsive-img p-2"
+             >
+                  </a>
+
+                </div>
+                <div class="col-md-8 d-flex flex-column justify-content-center p-3">
+                  <h4 class="card-title mb-2" style="font-size: 24px; color: #ff4500;">
+                    <b>{{ orginazationCategorydata?.name || 'Trainings' }} </b>
+                  </h4>
+                  <p class="card-text" style="font-size: 18px;">
+                    {{ orginazationCategorydata?.desc }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="container text-end mt-3">
+              <!-- <button class="btn btn-light"  style="font-size: 20px;">
+                <i class="fas fa-share-alt"></i>
+              </button> -->
+              <!-- <button (click)="navigateTo('add-training')" nz-button class="login-form-button login-form-margin"
+                 style="background-color: orange; border-color: orange;border-radius: 5px;">
+                 <i class="fas fa-user faicon"></i>
+                 Add Training programme
+              </button> -->
+            </div>
+
+
+            <div class="container card mt-3">
+              <div class="slider-div">
+                <ng-container>
+                  <div class="row mt-3 g-1">
+                    <div *ngIf="subCategories.length === 0" class="col-12 text-center">
+                      <p style="font-size: 16px; color: gray;">Data not found</p>
+                      <img src="../../assets/images/not _found.jpg" alt="No Data" class="img-fluid" style="width: 30%;">
+
+                    </div>
+
+                    <div *ngFor="let organization of subCategories" class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-4">
+                      <div class="image-container text-center">
+                        <a (click)="navigateToSubCategory(organization._id)">
+                          <img
+                            [src]="organization.image && organization.image !== 'null'
+                                  ?  organization.image
+                                  : '../../assets/images/profile1.webp'"
+                            style="height: 20vh; width: 100%; max-width: 200px; border-radius: 20px;"
+                            class="img-fluid img-thumbnail"
+                            alt="image">
+                        </a>
+
+                        <p class="my-2 text-truncate" style="font-size: 14px;">{{ organization.name }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+  <!-- </ng-template> -->
+
+  <!-- <ng-template [ngIf]="displayName === 'display2'">
+    <div class="col-md-6 col-lg-7 col-xl-8 mt-3 hide-scrollbar" style="overflow-y: scroll; height: 80vh;">
+      <section>
+        <div>
+          <div class="card mt-3">
+            <div class="row no-gutters">
+              <div class="col-md-4 text-center">
+                <img [src]="(orginazationCategorydata && orginazationCategorydata.image) ? orginazationCategorydata.image : '../../assets/images/training.png'"
+                     class="responsive-img p-2">
+              </div>
+              <div class="col-md-8 d-flex flex-column justify-content-center p-3">
+                <h4 class="card-title mb-2" style="font-size: 24px; color: #ff4500;">
+                  <b>{{ orginazationCategorydata?.name || 'Training' }} </b>
+                </h4>
+                <p class="card-text" style="font-size: 18px;">{{ orginazationCategorydata?.desc }}</p>
+              </div>
+            </div>
+          </div>
+          <div class=" align-items-end">
+
+            <button (click)="navigateTo('add-training')" nz-button class="login-form-button login-form-margin"
+                style="background-color: orange; border-color: orange; border-radius: 5px;">
+                <i class="fas fa-user faicon"></i>
+                Add Training Programme
+            </button>
+          </div>
+
+
+
+          <div class="container card mt-3">
+            <div class="slider-div">
+              <ng-container>
+                <div class="row mt-3 g-1">
+                  <div *ngIf="organizations.length === 0" class="col-12 text-center">
+                    <p style="font-size: 16px; color: gray;">Data not found</p>
+                    <img src="../../assets/images/not _found.jpg" alt="No Data" class="img-fluid" style="width: 30%;">
+                  </div>
+                  <div *ngFor="let organization of organizations" class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-4">
+                    <div class="image-container text-center">
+                      <a (click)="navigateorganizationDetail(organization._id)">
+                        <img
+                          [src]="organization.image && organization.image !== 'null'
+                                ? organization.image
+                                : '../../assets/images/profile1.webp'"
+                          style="height: 20vh; width: 100%; max-width: 200px; border-radius: 20px;"
+                          class="img-fluid img-thumbnail"
+                          alt="image">
+                      </a>
+                      <p class="my-2 text-truncate" style="font-size: 14px;">{{ organization.name }}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </ng-template> -->
+
+
+
+
+
+      <div class="col-md-3 col-lg-2 mt-5 d-none d-md-block">
+        <div class="image-container"  style="position: relative;">
+          <img src="../../assets/images/saynotoplastic.webp"
+               class="img-fluid"
+               style="height: 600px; width: 100%; object-fit: fill;"
+               alt="Ad Space"
+               id="banner-image">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+
+  <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="mt-5">
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+    type="ball-spin-clockwise">
+  </ngx-spinner>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-12">
+          <div class="card p-4 shadow">
+            <div class="text-center mb-4">
+              <h4 class="text-warning">OTP Verification</h4>
+              <p class="text-muted">Check your text messages for the OTP</p>
+            </div>
+            <div class="form-group mb-4">
+              <input
+                id="verification_otp"
+                formControlName="verification_otp"
+                placeholder="Enter verification OTP"
+                type="text"
+                class="form-control form-control-lg text-center"
+              />
+              <div
+                *ngIf="verifyForm.get('verification_otp')?.touched && verifyForm.get('verification_otp')?.invalid"
+                class="text-danger mt-2"
+              >
+                <div *ngIf="verifyForm.get('verification_otp')?.hasError('required')">
+                  OTP is required.
+                </div>
+                <div *ngIf="verifyForm.get('verification_otp')?.hasError('pattern')">
+                  OTP must be exactly 4 digits.
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button
+                type="button"
+                class="btn btn-link text-muted"
+                (click)="resendOtp()"
+                [disabled]="isDisabled">
+                Resend OTP <span *ngIf="isDisabled">({{ countdown }}s)</span>
+              </button>
+            </div>
+            <div class="text-center mb-3">
+              <button type="submit" class="btn btn-warning btn-lg w-100">
+                Continue
+              </button>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

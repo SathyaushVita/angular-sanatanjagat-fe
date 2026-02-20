@@ -1,0 +1,469 @@
+
+<div class="container py-4 header-m mt-5">
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+    type="ball-spin-clockwise">
+</ngx-spinner>
+
+      <div class="form-card">
+        <ng-template [ngIf]="displayName === 'organization'">
+
+          <form [formGroup]="eventform" class="p-5">
+              <div class="row">
+                  <h3 class="section-header-title text-center">Add Event</h3>
+              </div>
+              <div class="temple-form-heading ">
+                  <h3>Event Details</h3>
+                  <hr>
+                  <div class="row">
+                      <div class="col-md-8">
+                          <div class="form-group">
+                              <label for="goshalanmae">Event Name*</label>
+                              <input type="text" class="form-control" id="templeName" formControlName="name" placeholder="Enter the Event Name">
+                              <div *ngIf="eventform.get('name')?.invalid && (eventform.get('name')?.dirty || eventform.get('name')?.touched)" class="text-danger">
+                                Name is required
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="GoshalaCategory">Event Category*</label>
+                              <select class="form-control" id="goshalaCategory" formControlName="category" >
+                                  <option *ngFor="let option of goshalaCategoryoptions" [value]="option.value">{{ option.label }}</option>
+                                </select>
+                                <div *ngIf="eventform.get('category')?.invalid && (eventform.get('category')?.dirty || eventform.get('category')?.touched)" class="text-danger">
+                                  Event Category is required
+                                </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="start_date">Start Date*</label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="start_date"
+                          formControlName="start_date"
+                          placeholder="Enter the Start Date"
+                          [min]="getsFormattedMinDate()"
+                          (change)="onStartDateChange()"/>
+                        <div
+                          *ngIf="eventform.get('start_date')?.invalid && (eventform.get('start_date')?.dirty || eventform.get('start_date')?.touched)"
+                          class="text-danger"
+                        >
+                          Start Date is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="end_date">End Date*</label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="end_date"
+                          formControlName="end_date"
+                          placeholder="Enter the End Date"
+                          [min]="formattedEndDateMin"
+                        />
+                        <div
+                          *ngIf="eventform.get('end_date')?.invalid && (eventform.get('end_date')?.dirty || eventform.get('end_date')?.touched)"
+                          class="text-danger"
+                        >
+                          End date is required
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group">
+                        <label for="registartion numer">Start Time *</label>
+                        <input type="time" class="form-control" id="reg_num" formControlName="start_time" >
+                        <div *ngIf="eventform.get('start_time')?.invalid && (eventform.get('start_time')?.dirty || eventform.get('start_time')?.touched)" class="text-danger">
+                          Start Time is required
+                        </div>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                       <label for="registartion numer">End Time *</label>
+                       <input type="time" class="form-control" id="reg_num" formControlName="end_time" >
+                       <div *ngIf="eventform.get('end_time')?.invalid && (eventform.get('end_time')?.dirty || eventform.get('end_time')?.touched)" class="text-danger">
+                        End Time is required
+                      </div>
+                      </div>
+                   </div>
+                </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                         <div class="form-group">
+                          <label for="address">Contact Name*</label>
+                          <input type="text" class="form-control" id="address" formControlName="contact_name" placeholder="Enter the Contact Name">
+                          <div *ngIf="eventform.get('contact_name')?.invalid && (eventform.get('contact_name')?.dirty || eventform.get('contact_name')?.touched)" class="text-danger">
+                            Contact Name is required
+                          </div>
+                         </div>
+                      </div>
+                      <div class="col-md-6">
+                        <!-- <div class="form-group">
+                         <label for="contact_phone">Contact Number*</label>
+                         <input type="text" class="form-control" id="contact_phone" formControlName="contact_phone" placeholder="Enter the Contact Number">
+                         <div *ngIf="eventform.get('contact_phone')?.invalid && (eventform.get('contact_phone')?.dirty || eventform.get('contact_phone')?.touched)" class="text-danger">
+                          Contact  Number is required
+                        </div>
+                        </div> -->
+
+
+                        <div class="form-group">
+                          <label for="contact_phone" class="font-weight-bold">Contact Number*</label>
+                          <input
+                            id="contact_phone"
+                            formControlName="contact_phone"
+                            type="number"
+                            class="form-control"
+                            placeholder="Enter your contact number" [class.is-invalid]="eventform.get('contact_phone')?.touched && eventform.get('contact_phone')?.invalid"
+                          />
+                          <div *ngIf="eventform.controls['contact_phone'].invalid && eventform.controls['contact_phone'].touched" class="text-danger">
+                            
+                            <div *ngIf="eventform.controls['contact_phone'].hasError('maxLength')">
+                              Contact Number cannot be more than 10 digits.
+                            </div>
+                            <div *ngIf="eventform.controls['contact_phone'].hasError('pattern')">
+                              Contact Number must be a 10-digit number.
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="temple_map_location"> Map Location (URL) *</label>
+                        <div class="input-group">
+                          <input
+                            type="url"
+                            class="form-control"
+                            id="temple_map_location"
+                            formControlName="map_location"
+                            placeholder="https://example.com/map"
+                          />
+                          <div class="input-group-append">
+                            <button
+                              type="button"
+                              class="btn btn-outline-secondary"
+                              (click)="getCurrentLocation()"
+                              title="Fetch Current Location"
+                            >
+                              <span>📍</span> Get Location
+                            </button>
+                          </div>
+                        </div>
+                        <small class="form-text text-muted">
+                          Please provide a valid URL for the map location.
+                        </small>
+                        <div
+                          *ngIf="eventform.get('map_location')?.invalid && (eventform.get('map_location')?.dirty || eventform.get('map_location')?.touched)"
+                          class="text-danger"
+                        >
+                          Please enter a valid URL for the Temple Map Location.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group">
+                        <label for="address"> Email*</label>
+                        <input type="text" class="form-control" id="contact_email" formControlName="contact_email" placeholder="Enter the Email">
+                        <div *ngIf="eventform.get('contact_email')?.invalid && (eventform.get('contact_email')?.dirty || eventform.get('contact_email')?.touched)" class="text-danger">
+                           Email is required
+                        </div>
+                       </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                       <label for="address">Address*</label>
+                       <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter the Address">
+                       <div *ngIf="eventform.get('address')?.invalid && (eventform.get('address')?.dirty || eventform.get('address')?.touched)" class="text-danger">
+                          Address is required
+                       </div>
+                      </div>
+                   </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                       <label for="address">Description *</label>
+                       <textarea class="form-control" id="desc" formControlName="desc" placeholder="Describe about the Event in less than 4500 words" rows="3"></textarea>
+                       <div *ngIf="eventform.get('desc')?.invalid && (eventform.get('desc')?.dirty || eventform.get('desc')?.touched)" class="text-danger">
+                        Description is required
+                     </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a country">
+                        <label for="country">Country *</label>
+                        <nz-select
+                          formControlName="country"
+                          nzPlaceHolder="Select Country"
+                          [nzShowSearch]="true" nzNotFoundContent="No data found">
+
+                          <nz-option
+                            *ngFor="let option of CountryOptions"
+                            [nzValue]="option.value"
+                            [nzLabel]="option.label">
+                          </nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                      <div *ngIf="eventform.get('country')?.invalid && (eventform.get('country')?.dirty || eventform.get('country')?.touched)" class="text-danger">
+                        Please select a Country.
+                      </div>
+                    </nz-form-item>
+                  </div>
+
+                  <div class="col-md-4">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a state">
+                        <label for="state">State *</label>
+                        <nz-select
+                          formControlName="state"
+                          nzPlaceHolder="Select State"
+                          [nzShowSearch]="true"
+                          nzNotFoundContent="No data found"
+                          [nzDisabled]="!eventform.get('country')?.value">
+                          <nz-option
+                            *ngFor="let option of StateOptions"
+                            [nzValue]="option.value"
+                            [nzLabel]="option.label">
+                          </nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                      <div *ngIf="eventform.get('state')?.invalid && (eventform.get('state')?.dirty || eventform.get('state')?.touched)" class="text-danger">
+                        Please select a State.
+                      </div>
+                    </nz-form-item>
+                  </div>
+
+                  <div class="col-md-4">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a district">
+                        <label for="district">District *</label>
+                        <nz-select
+                          formControlName="district"
+                          nzPlaceHolder="Select District"
+                          [nzShowSearch]="true"
+                          nzNotFoundContent="No data found"
+                          [nzDisabled]="!eventform.get('state')?.value">
+                          <nz-option
+                            *ngFor="let option of DistrictOptions"
+                            [nzValue]="option.value"
+                            [nzLabel]="option.label">
+                          </nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                      <div *ngIf="eventform.get('district')?.invalid && (eventform.get('district')?.dirty || eventform.get('district')?.touched)" class="text-danger">
+                        Please select a District.
+                      </div>
+                    </nz-form-item>
+                  </div>
+
+                  <div class="col-md-4">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a mandal">
+                        <label for="mandal">Mandal*</label>
+                        <nz-select
+                          formControlName="mandal"
+                          nzPlaceHolder="Select Mandal"
+                          [nzShowSearch]="true"
+                          nzNotFoundContent="No data found"
+                          [nzDisabled]="!eventform.get('district')?.value">
+                          <nz-option
+                            *ngFor="let option of MandalOptions"
+                            [nzValue]="option.value"
+                            [nzLabel]="option.label">
+                          </nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                      <div *ngIf="eventform.get('mandal')?.invalid && (eventform.get('mandal')?.dirty || eventform.get('mandal')?.touched)" class="text-danger">
+                        Please select a Mandal.
+                      </div>
+                    </nz-form-item>
+                  </div>
+
+                  <div class="col-md-4">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please select a village">
+                        <label for="village">Village *</label>
+                        <nz-select
+                          formControlName="object_id"
+                          nzPlaceHolder="Select Village"
+                          [nzShowSearch]="true"
+                          nzNotFoundContent="No data found"
+                          [nzDisabled]="!eventform.get('mandal')?.value">
+                          <nz-option
+                            *ngFor="let option of VillageOptions"
+                            [nzValue]="option.value"
+                            [nzLabel]="option.label">
+                          </nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                      <div *ngIf="eventform.get('object_id')?.invalid && (eventform.get('object_id')?.dirty || eventform.get('object_id')?.touched)" class="text-danger">
+                        Please select a Village.
+                      </div>
+                    </nz-form-item>
+                  </div>
+                </div>
+
+
+
+                    <!-- <div class="col-md-3">
+                      <label>Upload image *</label>
+                      <nz-upload
+                        nzListType="picture-card"
+                        [(nzFileList)]="bannerFileList"
+                        [nzShowButton]="bannerFileList.length < 1"
+                        (nzChange)="handleBannerFileChange($event)"
+                        [nzAccept]="'image/*'"
+                        (nzRemove)="handleBannerFileRemove()">
+                        <div>
+                          <i nz-icon nzType="plus"></i>
+                          Upload Image
+                        </div>
+                      </nz-upload>
+                      <div *ngIf="eventform.get('image_location')?.touched && eventform.get('image_location')?.invalid" class="text-danger">
+                        Image is required.
+                      </div>
+                    </div> -->
+
+
+                    <div class="col-md-3">
+                      <label>Upload image *</label>
+                      <nz-upload
+                        nzListType="picture-card"
+                        [(nzFileList)]="bannerFileList"
+                        [nzShowButton]="bannerFileList.length < 1"
+                        (nzChange)="handleBannerFileChange($event)"
+                        [nzAccept]="'image/*'"
+                        (nzRemove)="handleBannerFileRemove()">
+                        <div>
+                          <i nz-icon nzType="plus"></i>
+                          Upload Image
+                        </div>
+                      </nz-upload>
+                      <div
+                        *ngIf="eventform.get('image_location')?.touched && eventform.get('image_location')?.invalid"
+                        class="text-danger">
+                        Image is required.
+                      </div>
+                    </div>
+                    
+                    
+
+
+
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+
+                        <div class="text-center">
+                          <button type="button" (click)="onSubmit()" style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white; padding: 15px;"> Submit </button>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+          </form>
+        </ng-template>
+
+        <ng-template [ngIf]="displayName === 'Submission'">
+
+<div class="container mt-5 mb-5">
+  <div class="row" style="margin-top: 100px;">
+      <div class="col-md-10" >
+          <!-- <h4 class="mb-5 text-center">Detailed View of {{ eventdata.name }}</h4> -->
+          <div class="row align-items-center mb-5">
+            <div class="col text-center">
+                <h4>Detailed View of {{ eventdata.name }}</h4>
+            </div>
+
+        </div>
+          <div class="row">
+              <div class="col-md-6 text-center">
+                  <div class="image-container mb-5">
+                      <a >
+                          <img [src]="eventdata.image_location ? 'data:image/jpeg;base64,' + eventdata.image_location : 'assets/ohm.jpg'"
+                               alt="image"
+                               class="img-fluid rounded"
+                               style="height:400px;width:500px;max-width:100%;"
+                               (error)="handleImageError($event)">
+                      </a>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="details" style="margin-top: 30px;">
+                      <div class="detail mb-3">
+                          <span class="detail-label"><b>Name:</b></span> {{ eventdata.name }}
+                      </div>
+                      <div class="detail mb-3">
+                          <span class="detail-label"><b>Address:</b></span> {{ eventdata.address }}
+                      </div>
+
+                      <div class="detail mb-3">
+                        <span class="detail-label"><b>Map Location:</b></span>
+                        <a href="{{ eventdata.map_location }}" target="_blank">{{ eventdata.map_location }}</a>
+                    </div>
+                      <div class="detail mb-3">
+                          <span class="detail-label"><b>Start Date:</b></span> {{ eventdata.start_date }}
+                      </div>
+                      <div class="detail mb-3">
+                          <span class="detail-label"><b>End Date:</b></span> {{ eventdata.end_date }}
+                      </div>
+                      <div class="detail mb-3">
+                          <span class="detail-label"><b>Start Time:</b></span> {{ eventdata.start_time }}
+                      </div>
+                      <div class="detail mb-3">
+                          <span class="detail-label"><b>End Time:</b></span> {{ eventdata.end_time }}
+                      </div>
+                      <div class="detail mb-3">
+                        <span class="detail-label"><b>Email:</b></span> {{ eventdata.contact_email }}
+                    </div>
+                    <div class="detail mb-3">
+                      <span class="detail-label"><b>contact phone:</b></span> {{ eventdata.contact_phone }}
+                  </div>
+                  <div class="detail mb-3">
+                    <span class="detail-label"><b>Contact Name:</b></span> {{ eventdata.contact_name }}
+                </div>
+                  <!-- <div class="detail mb-3">
+                    <span class="detail-label"><b>Description:</b></span> {{ eventdata.desc }}
+                      </div> -->
+                        <!-- <div class="detail">
+                          <span class="detail-label"><b>Map Location:</b></span>
+                          <a (click)="openMap(eventdata.map_location)" href="Event Map Location">Event Map Location</a>
+                      </div> -->
+                  </div>
+              </div>
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Description:</b></span> {{ eventdata.desc }}
+            </div>
+          </div>
+
+
+
+      </div>
+
+  </div>
+</div>
+
+        </ng-template>
+
+
+      </div>
+  </div>

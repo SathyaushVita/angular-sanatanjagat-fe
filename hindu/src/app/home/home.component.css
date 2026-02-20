@@ -1,0 +1,44 @@
+
+button:hover{
+    transform: scale(1.05);
+}
+button{
+    width:200px;
+}
+
+.responsive-image {
+    width: 100%;
+}
+
+.responsive {
+    width: 100%;
+  
+}
+
+
+@media (min-width: 1200px) {
+    .responsive-image {
+        height: 35vh;
+    }
+    .responsive {
+        height: 50vh;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .responsive-image {
+        height: 40vh;
+    }
+    .responsive {
+        height: 45vh;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .responsive-image {
+        height: 20vh;
+    }
+    .responsive {
+        height: 20vh;
+    }
+}

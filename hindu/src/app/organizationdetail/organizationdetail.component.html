@@ -1,0 +1,19 @@
+<div *ngIf="organizationData; else noData" style="margin-top: 100px;">
+  <h2>{{ organizationData.organization_name }}</h2>
+  <p><strong>Established By:</strong> {{ organizationData.est_by }}</p>
+  <p><strong>Chairman:</strong> {{ organizationData.chairman }}</p>
+  <p><strong>Established Date:</strong> {{ organizationData.est_date | date }}</p>
+  <p><strong>Registration ID:</strong> {{ organizationData.reg_id }}</p>
+  <p><strong>Website:</strong> <a [href]="organizationData.web_url" target="_blank">{{ organizationData.web_url }}</a></p>
+  <p><strong>Location:</strong> {{ organizationData.location }}</p>
+  <p><strong>Details:</strong> {{ organizationData.org_detail }}</p>
+  <p><strong>Mission:</strong> {{ organizationData.mission }}</p>
+  <p><strong>Members:</strong> {{ organizationData.organization_members }}</p>
+  <p><strong>Category:</strong> {{ organizationData.category_id }}</p>
+  <!-- Add more fields as necessary -->
+</div>
+
+
+<ng-template #noData>
+  <p>No organization data available.</p>
+</ng-template>

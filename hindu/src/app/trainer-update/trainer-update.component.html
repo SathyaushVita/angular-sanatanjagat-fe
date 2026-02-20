@@ -1,0 +1,163 @@
+
+<div class="container p-4" *ngIf="!isMemberIn" style="max-width: 600px; margin: 0 auto; max-height: 800px;background-color: #f2f2f2;">
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+    type="ball-spin-clockwise">
+  </ngx-spinner>
+    <form [formGroup]="memberform" >
+        <div>
+            <div class="row">
+                <h3 class="text-center">Member Registration</h3>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="surname">Surname</label>
+                    <input type="text" class="form-control" id="surname" formControlName="surname" placeholder="Enter your full name" required>
+                    <div *ngIf="memberform.get('surname')?.invalid && memberform.get('surname')?.touched" class="text-danger">
+                        surname is required.
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label for="full_name">Name</label>
+                    <input type="text" class="form-control" id="full_name" formControlName="full_name" placeholder="Enter your full name" required>
+                    <div *ngIf="memberform.get('full_name')?.invalid && memberform.get('full_name')?.touched" class="text-danger">
+                        Full Name is required.
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="father_name">Father's Name</label>
+                    <input type="text" class="form-control" id="father_name" formControlName="father_name" placeholder="Enter your father's name" required>
+                    <div *ngIf="memberform.get('father_name')?.invalid && memberform.get('father_name')?.touched" class="text-danger">
+                        Father's Name is required.
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" formControlName="gender" required>
+                        <option value="" disabled>Select your gender</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                    <div *ngIf="memberform.get('gender')?.invalid && memberform.get('gender')?.touched" class="text-danger">
+                        Gender is required.
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="contact_number">Contact Number</label>
+                    <input type="tel" class="form-control" id="contact_number" formControlName="contact_number" placeholder="Enter your contact number" required>
+                    <div *ngIf="memberform.get('contact_number')?.invalid && memberform.get('contact_number')?.touched" class="text-danger">
+                        Contact Number is required.
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="training_type">Training Type</label>
+                    <select class="form-control" id="training_type" formControlName="training_type" required>
+                        <option value="" disabled>Select your Mode</option>
+                        <option value="online">ONLINE</option>
+                        <option value="offline">OFFLINE</option>
+                    </select>
+                    <div *ngIf="memberform.get('training_type')?.invalid && memberform.get('training_type')?.touched" class="text-danger">
+                        Training Type is required.
+                    </div>
+                   
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="email">Email*</label>
+                    <input id="email" type="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+                    <div *ngIf="memberform.controls['email'].invalid && memberform.controls['email'].touched" class="text-danger">
+                      A valid Email is required.
+                    </div>
+                  </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="certificate" class="form-label">Certificate</label>
+                    <nz-upload 
+                        nzListType="picture-card" 
+                        [(nzFileList)]="certificateFileList"
+                        [nzShowButton]="certificateFileList.length < 1" 
+                        (nzChange)="handleFileChange($event, 'certificate')"
+                        [nzAccept]="'image/*'"  
+                        class="round-upload">
+                        <div>
+                            <i nz-icon nzType="plus"></i>
+                            Upload Image
+                        </div>
+                    </nz-upload>
+                    <div *ngIf="memberform.get('certificate')?.invalid && memberform.get('certificate')?.touched" class="text-danger">
+                        Certificate is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container p-4" *ngIf="isMemberIn" style="max-width: 600px; margin: 0 auto; max-height: 800px; background-color: #f2f2f2;">
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+    type="ball-spin-clockwise">
+  </ngx-spinner>
+    <form [formGroup]="connectForm" (ngSubmit)="onSubmit()">
+        <div>
+            <div class="row">
+                <h6 class="text-center">Trainer Registration</h6>
+            </div>
+            <div class="row mt-2">
+                <!-- <div class="form-group col-md-12">
+                    <label for="email">Email*</label>
+                    <input id="email" type="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+                    <div *ngIf="memberform.controls['email'].invalid && memberform.controls['email'].touched" class="text-danger">
+                      A valid Email is required.
+                    </div>
+                  </div> -->
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="certificate" class="form-label">Certificate</label>
+                            <nz-upload 
+                                nzListType="picture-card" 
+                                [(nzFileList)]="certificateFileList"
+                                [nzShowButton]="certificateFileList.length < 1" 
+                                (nzChange)="handleFileChange($event, 'certificate')"
+                                [nzAccept]="'image/*'"  
+                                class="round-upload">
+                                <div>
+                                    <i nz-icon nzType="plus"></i>
+                                    Upload Image
+                                </div>
+                            </nz-upload>
+                            <div *ngIf="connectForm.get('certificate')?.invalid && connectForm.get('certificate')?.touched" class="text-danger">
+                                Certificate is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> 

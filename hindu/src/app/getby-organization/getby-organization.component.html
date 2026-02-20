@@ -1,0 +1,108 @@
+
+
+
+
+
+
+<div class="container mb-5" style="margin-top: 120px;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-9" *ngIf="!allFieldsEmpty; else noData">
+        <div class="row align-items-center mb-5">
+          <div class="col-4 text-end">
+            <img
+              [src]="organization.org_logo && organization.org_logo !== 'data not found' ? organization.org_logo : '../../assets/images/noImageDataImage.jpg'"
+              class="img-fluid rounded-circle"
+              style="width: 100px; height: 100px; object-fit: fill;"
+              alt="Organization Logo"
+              (error)="handleImageError($event)"
+            >
+          </div>
+          <div class="col-8 d-flex align-items-center justify-content-between">
+            <h6 class="mb-0 text-start" style="color: orange;">{{ organization.organization_name }}</h6>
+            <button class="btn btn-light" (click)="shareGoshala(organization)" style="font-size: 20px;">
+              <i class="fas fa-share-alt"></i>
+            </button>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-12 col-md-6 d-flex justify-content-center align-items-start mb-4 mb-md-0">
+            <div class="image-container">
+              <img
+                [src]="organization.org_images && organization.org_images !== 'data not found' ? organization.org_images : '../../assets/images/noImageDataImage.jpg'"
+                class="img-fluid rounded"
+                style="height: auto; max-height: 300px; object-fit: cover;"
+                alt="Organization Image"
+                (error)="handleImageError($event)"
+              >
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="details mt-4 mt-md-0">
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Name:</b></span> {{ organization.organization_name }}
+              </div>
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Chairman:</b></span> {{ organization.chairman }}
+              </div>
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Registration Id:</b></span> {{ organization.reg_id }}
+              </div>
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Established By:</b></span> {{ organization.est_by }}
+              </div>
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Location:</b></span> {{ organization.location }}
+              </div>
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Organization Members:</b></span> {{ organization.organization_members }}
+              </div>
+              <div class="detail mb-3">
+                <span class="detail-label"><b>Website:</b></span>
+                <a [href]="organization.web_url" target="_blank">{{ organization.web_url }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <hr class="my-4">
+        <div class="detail mb-3">
+          <span class="detail-label"><b>Mission:</b></span> {{ organization.mission }}
+        </div>
+  
+        <div class="detail mb-3">
+          <span class="detail-label"><b>Organization Details:</b></span> {{ organization.org_detail }}
+        </div>
+      </div>
+
+
+      
+  
+
+
+      <ng-template #noData>
+        <div class="border border-danger rounded p-3 bg-light col-12 col-md-9" style="height: 75vh;">
+          <p class="text-center text-danger mb-0">
+            <b>
+              Your added Organization is currently under review and marked as pending. 
+              Our team will process and review it shortly before it becomes visible.
+            </b>
+          </p>
+        </div>
+      </ng-template>
+
+      <div class="col-12 col-md-2 d-md-block mt-5">
+        <div class="image-container mt-5 mt-md-0" style="position: relative;">
+          <img 
+            src="../../assets/images/saynotoplastic.webp"
+            class="img-fluid"
+            style="height: 600px; width: 100%; object-fit: fill;"
+            alt="Ad Space" 
+            id="banner-image">
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+  

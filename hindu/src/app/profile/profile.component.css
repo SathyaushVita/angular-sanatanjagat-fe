@@ -1,0 +1,37 @@
+/* .profile-picture {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    object-fit: cover;
+  }  */
+  .capitalize {
+    text-transform: capitalize;
+  }
+  
+
+
+
+  /* .overlay-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-radius: 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; 
+    transition: opacity 0.2s; 
+  }
+  
+  .position-relative:hover .overlay-icons {
+    opacity: 1; 
+  }
+  
+  .icon-view-delete {
+    font-size: 1.5em;
+    cursor: pointer;
+  } */

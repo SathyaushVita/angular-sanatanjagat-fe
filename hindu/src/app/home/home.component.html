@@ -1,0 +1,206 @@
+<div >
+    <div class="container " style="margin-top: 75px;">
+      <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+      type="ball-spin-clockwise">
+    </ngx-spinner>
+      <div class="row text-center">
+        <div class="col-12 mt-5">
+          <img src="../../assets/images/Group.png" class="img-fluid responsive-image" alt="Image" style="border-radius: 31px; text-align: center;">
+        </div>
+      </div>
+    </div>
+
+        <!-- <div class="col-12 ">
+      <app-world-map class="world-map"></app-world-map>
+
+    </div> -->
+
+<div class="container-fluid">
+  <div class="row">
+
+
+
+    <div class="col-md-2 d-none d-md-block" style="margin-top: 80px;">
+      <div class="container" >
+        <img src="../../assets/images/nae576.webp"
+             class="img-fluid"
+             style="height: 600px; width: 100%; object-fit: fill;"
+             alt="Left Ad Space"
+             id="left-banner-image">
+      </div>
+
+
+
+      <div class="container mt-5" >
+        <img src="../../assets/images/saynotoplastic.webp"
+             class="img-fluid"
+             style=" width: 100%; object-fit: fill;"
+             alt="Left Ad Space"
+             id="left-banner-image">
+      </div>
+    </div>
+
+
+
+    <div class="col-md-8">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Organizations</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let org of organizations" class="col-6 col-md-3">
+            <div class="text-center">
+              <a (click)="navigateToOrganizations1(org)">
+                <!-- <img [src]="org.org_logo && org.org_logo !== 'data not found' ?  org.org_logo : '../../assets/images/noImageDataImage.jpg'"
+                     style="height: 25vh; width: 30vh; border-radius:20px;"
+                     class="img-fluid img-thumbnail mx-2"
+                     alt="image"> -->
+                     <img [src]="org.image && !org.image.includes('data not found') ? org.image : 'assets/images/noImageDataImage.jpg'"
+     style="height: 25vh; width: 30vh; border-radius:20px;"
+     class="img-fluid img-thumbnail mx-2"
+     alt="image">
+
+              </a>
+
+              <p class="text-center">{{ org.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-center mt-3 mb-3">
+        <button (click)="navigateToOrganizations()" class="p-2"
+                style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white;">
+          View more Organizations
+        </button>
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Events</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let org of events" class="col-6 col-md-3">
+            <div class="text-center">
+              <a (click)="navigateToeventCategoryDetail(org)">
+                <img [src]="org.pic && !org.pic.includes('data not found') ? org.pic : 'assets/images/noImageDataImage.jpg'"
+                     style="height: 25vh; width: 30vh; border-radius:20px;"
+                     class="img-fluid img-thumbnail mx-2"
+                     alt="image">
+
+              </a>
+              <p class="text-center">{{ org.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-center mt-3 mb-3">
+        <button (click)="navigateToevent()" class="p-2"
+                style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white;">
+          View more Events
+        </button>
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 style="font-size: 30px;font-weight: bold;" class="text-center">Training</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let org of training" class="col-6 col-md-3">
+            <div class="text-center">
+              <a (click)="navigateToCategoryDetail(org)">
+                <img [src]="org.image ?  org.image : '../../assets/images/noImageDataImage.jpg'"
+                     style="height: 25vh; width: 30vh; border-radius:20px;"
+                     class="img-fluid img-thumbnail mx-2"
+                     alt="image">
+              </a>
+              <p class="text-center">{{ org.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-center mt-3">
+        <button (click)="navigateToTraining()" class="p-2"
+                style="border-width: 0px;background-color: rgb(241, 124, 15);border-radius:20px;color: white;">
+          View more Trainings
+        </button>
+      </div>
+    </div>
+
+
+    <div class="col-md-2 d-none d-md-block" style="margin-top: 80px;">
+      <div class="container">
+        <img src="../../assets/images/saynotoplastic.webp"
+             class="img-fluid"
+             style="height: 600px; width: 100%; object-fit: fill;"
+             alt="Right Ad Space"
+             id="right-banner-image">
+      </div>
+
+      <div class="container mt-5" >
+        <img src="../../assets/images/nae576.webp"
+             class="img-fluid"
+             style=" width: 100%; object-fit: fill;"
+             alt="Left Ad Space"
+             id="left-banner-image">
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-12 text-center mt-5">
+          <h5>Can't find what you are looking for?</h5>
+          <p>If you are unable to find your Organization, Event or Training, kindly add it here.</p>
+
+              <button (click)="navigateTo('addorganizations')"  class="m-2 mr-5" style="border-width: 1px;background-color:rgb(238, 141, 51);border-radius: 25px;color:black;width:180px;height: 65px;font-size: 18px;">
+                  <i class="fas fa-globe faicon"></i>
+                  Add Organization
+              </button>
+
+
+
+              <button (click)="navigateTo('addevent')" class="p-2 m-2 mr-5" style="border-width: 1px;background-color:rgb(238, 141, 51);border-radius: 25px;color:black;width:180px;height: 65px;font-size:18px;">
+                <i class="fas fa-calendar-alt faicon"></i>
+                Add Event
+              </button>
+
+
+          <button  (click)="navigateTo('add-training')" class="p-2 m-2 mr-5" style="border-width: 1px;background-color:rgb(238, 141, 51);border-radius: 25px;color:black;width:180px;height: 65px;font-size:18px;">
+              <!-- <i class="fas fa-glyphicon-user-alt faicon"></i> -->
+              <!-- <mat-icon>training</mat-icon> -->
+              <i class="fas fa-user faicon"></i>
+
+
+              Add Training
+          </button>
+
+          <div class="mt-2 text-center d-flex justify-content-center align-items-center">
+              <p class="m-0">Invite your Friends and Family members</p>
+              <a  class="ml-3"  (click)="shareNews()"><i class="fas fa-share-alt text-info"></i></a>
+          </div>
+
+
+      </div>
+  </div>
+
+</div>
+
+
+</div>
+
+

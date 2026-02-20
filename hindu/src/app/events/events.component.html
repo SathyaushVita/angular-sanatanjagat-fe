@@ -1,0 +1,257 @@
+<div class="container-fluid mt-5">
+
+  <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+  type="ball-spin-clockwise">
+</ngx-spinner>
+  <div class="row">
+    <div [ngClass]="{'d-none': !filtersVisible, 'd-md-block': true}" class="col-md-3 col-xl-2  mt-5 ">
+      <div class="card ">
+        <div style="height: 300px;  overflow-y: auto;">
+          <div class="card-header" style="background: linear-gradient(to right, #ff5500, #FF8c00); color: white;">
+            <h3 class="mb-0" style="font-size: 15px;">Events Categories Filters</h3>
+        </div>
+          <div class="card-body">
+            <nz-tree [nzData]="nodes" [nzSearchValue]="searchValue"  (nzClick)="onCategoryClick($event)"   nzBlockNode> </nz-tree>
+          </div>
+        </div>
+      </div>
+      <div class="py-3">
+        <div class="card shadow-sm" style="width: 100%; max-width: 1200px;">
+          <div class="card-header text-white " style="background: linear-gradient(to right, #ff5500, #FF8c00); color: white;">
+            <h6 class="mb-0" style="font-size: 16px;">Location Filters</h6>
+          </div>
+          <div class="card-body">
+
+            <form [formGroup]="validatorForm">
+              <div class="">
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Please select a Country">
+
+                    <nz-select formControlName="country" nzPlaceHolder="Select Country "
+                      [nzShowSearch]="true" nzNotFoundContent="No data found">
+                      <nz-option *ngFor="let option of CountryOptions"
+                        [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+
+              <div class="">
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Please select a state">
+
+                    <nz-select formControlName="state" nzNotFoundContent="No data found" nzPlaceHolder="Select State "
+                      [nzShowSearch]="true" >
+                      <nz-option *ngFor="let option of StateOptions"
+                        [nzValue]="option.value"  [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div >
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Please select a District">
+
+                    <nz-select formControlName="district"  nzNotFoundContent="No data found" nzPlaceHolder="Select District "
+                      [nzShowSearch]="true" >
+                      <nz-option *ngFor="let option of DistrictOptions"
+                        [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div >
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Please select a state">
+
+                    <nz-select formControlName="mandal" nzNotFoundContent="No data found" nzPlaceHolder="Select Mandal "
+                      [nzShowSearch]="true" >
+                      <nz-option *ngFor="let option of MandalOptions"
+                        [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div >
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Please select a state">
+
+                    <nz-select formControlName="village" nzNotFoundContent="No data found" nzPlaceHolder="Select Village "
+                      [nzShowSearch]="true" >
+                      <nz-option *ngFor="let option of VillageOptions"
+                        [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+
+              </div>
+              <div class="text-center">
+                <button (click)="onReset()" class="btn btn-primary px-4 me-mb-2 text-white" style="background-color: orange; border-color: orange;">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="col-md-7 col-lg-8 col-xlg-8 mt-5">
+      <div class="card mt-3">
+        <div class="row no-gutters ">
+          <div class="col-md-4 text-center">
+                   <img [src]="(eventcategorydata && eventcategorydata && eventcategorydata.pic) ?
+                          eventcategorydata.pic :
+                          '../../assets/images/noImageDataImage.jpg'"
+
+                    class="card-img responsive-img"
+
+                   >
+
+          </div>
+          <div class="col-md-8 d-flex flex-column justify-content-center p-3">
+              <h4 class="card-title mb-2 " style="font-size: 24px; color: #ff4500;"><b>{{ eventcategorydata?.name }} Events</b></h4>
+
+              <p class="card-text" style="font-size: 18px;">{{ eventcategorydata?.desc }}</p>
+          </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="container text-end">
+      <!-- <button class="btn btn-light" (click)="shareGoshala(eventcategorydata)" style="font-size: 20px;">
+        <i class="fas fa-share-alt"></i>
+      </button> -->
+      <button (click)="navigateTo('addevent')" nz-button class="login-form-button login-form-margin"
+         style="background-color: orange; border-color: orange;">
+         <i class="fas fa-calendar-alt faicon"></i>
+         Add Event
+      </button>
+    </div>
+      <div class="d-flex justify-content-end align-items-end mb-4 gap-3 mt-3">
+        <div class="frame d-flex gap-3 card-container px-4 py-2" style="cursor: pointer;">
+          <div
+            class="text-wrapper text-center px-4 py-2"
+            [ngClass]="{ 'selected-tab': activeTab === 'upcoming', 'tab': activeTab !== 'upcoming' }"
+            (click)="updateTab('upcoming')"
+          >
+            Upcoming Events
+          </div>
+          <div
+            class="text-wrapper text-center px-4 py-2"
+            [ngClass]="{ 'selected-tab': activeTab === 'past', 'tab': activeTab !== 'past' }"
+            (click)="updateTab('past')"
+          >
+            Past Events
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="height: auto;">
+        <div class="div" style="height: 50vh; overflow-y: auto;overflow-x: hidden;">
+          <ng-container>
+
+            <div class="row mt-3" *ngIf="activeTab === 'upcoming'">
+              <ng-container *ngIf="UpComingeventdata && UpComingeventdata.length > 0; else noUpcomingEvents">
+                <div *ngFor="let UpComingeventdata of UpComingeventdata"
+                     class="col-12 col-sm-6 col-lg-6 mb-4">
+                  <div class="card h-100 d-flex flex-row align-items-center p-2 m-2"  style="cursor: pointer;">
+                  <div class="col-sm-4">
+                    <a (click)="navigateEventdata(UpComingeventdata._id)" class="me-5">
+                      <img [src]="UpComingeventdata.image_location[0] ? UpComingeventdata.image_location[0] : ''"
+                           alt="image"
+                           class="card-img p-2"
+                           style="height: 15vh; width: 100%; "
+                           (error)="handleImageError($event)"
+                           >
+                  </a>
+                </div>
+                    <div class="col-8">
+                      <h6 class="card-title mb-2">{{ UpComingeventdata.name }}</h6>
+                      <p class="mb-1" style="font-size: 14px;">Start Date: {{ UpComingeventdata.start_date }}</p>
+                      <p class="mb-1" style="font-size: 14px;">End Date: {{ UpComingeventdata.end_date }}</p>
+                      <p class="mb-1" style="font-size: 14px;">{{ UpComingeventdata.address }}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+
+              <ng-template #noUpcomingEvents>
+                <div class="row text-center">
+                  <div class="col">
+                    <img src="../../assets/images/not _found.jpg" alt="No Data" class="img-fluid" style="width: 30%;" />
+                  </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col">
+                    <p>No upcoming events available</p>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+
+            <div class="row mt-3" *ngIf="activeTab === 'past'">
+              <ng-container *ngIf="Completedeventdata && Completedeventdata.length > 0; else noPastEvents">
+                <div *ngFor="let Completedeventdata of Completedeventdata"
+                     class="col-12 col-sm-6 col-lg-6 mb-4">
+                  <div class="card h-100 d-flex flex-row align-items-center p-2">
+                <div class="col-4">
+                    <a (click)="navigateEventdata(Completedeventdata._id)" class="me-5">
+                      <img [src]="Completedeventdata.image_location[0] ? Completedeventdata.image_location[0] : '../../assets/images/noImageDataImage.jpg'"
+                           alt="image"
+                           class="card-img p-2"
+                           style="height: 15vh; width: 80%; "
+                           (error)="handleImageError($event)"
+                          >
+                  </a>
+                </div>
+                    <div class="col-8">
+                      <h6 class="card-title mb-2">{{ Completedeventdata.name }}</h6>
+                      <p class="mb-1" style="font-size: 14px;">Start Date: {{ Completedeventdata.start_date }}</p>
+                      <p class="mb-1" style="font-size: 14px;">End Date: {{ Completedeventdata.end_date }}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-template #noPastEvents>
+                <div class="row text-center">
+                  <div class="col">
+                    <img src="../../assets/images/not _found.jpg" alt="No Data" class="img-fluid" style="width: 30%;" />
+                  </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col">
+                    <p>No past events available</p>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="col-md-2 d-none d-md-block">
+      <div class="ad-space-container " style="margin-top: 70px;" >
+        <div class="image-container" style="position: relative;">
+          <img src="../../assets/images/saynotoplastic.webp"
+               class="img-fluid"
+               style="height: 600px; width: 100%; object-fit: fill;"
+               alt="Ad Space"
+               id="banner-image">
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,356 @@
+<div class="container py-4 header-m">
+
+  <ngx-spinner bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"
+  type="ball-spin-clockwise">
+</ngx-spinner>
+  <div class="form-card">
+    <ng-template [ngIf]="displayName === 'organization'">
+
+
+    <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()" class="p-5">
+      <div class="row mt-5">
+        <h3 class="section-header-title text-center">Add an Organization</h3>
+      </div>
+
+      <h3 class="organization-form-heading">Organization Details</h3>
+      <hr />
+
+      <div class="row mb-2">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="organizationName">Organization Name*</label>
+            <input type="text" class="form-control" id="organizationName" formControlName="organization_name" placeholder="Enter the Organization Name" [class.is-invalid]="organizationForm.get('organization_name')?.touched && organizationForm.get('organization_name')?.invalid">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="estBy">Established By *</label>
+            <input type="text" class="form-control" id="estBy" formControlName="est_by" placeholder="Enter the Founder Name" [class.is-invalid]="organizationForm.get('est_by')?.touched && organizationForm.get('est_by')?.invalid">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="chairman">Chairman *</label>
+            <input type="text" class="form-control" id="chairman" formControlName="chairman" placeholder="Enter the Chairman Name" [class.is-invalid]="organizationForm.get('chairman')?.touched && organizationForm.get('chairman')?.invalid">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="estDate">Established Date *</label>
+            <input type="date" class="form-control" id="estDate" formControlName="est_date" [class.is-invalid]="organizationForm.get('est_date')?.touched && organizationForm.get('est_date')?.invalid">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="regId">Registration Id *</label>
+            <input type="text" class="form-control" id="regId" formControlName="reg_id" placeholder="Enter the Registration ID" [class.is-invalid]="organizationForm.get('reg_id')?.touched && organizationForm.get('reg_id')?.invalid">
+          </div>
+        </div>
+
+        <!-- <div class="col-md-3">
+          <div class="form-group">
+            <label for="webUrl">Website URL *</label>
+            <input type="url" class="form-control" id="webUrl" formControlName="web_url" placeholder="http://example.com" [class.is-invalid]="organizationForm.get('web_url')?.touched && organizationForm.get('web_url')?.invalid">
+          </div>
+          <p style="font-size: 13px;">provide the correct url (http://example.com)</p>
+        </div> -->
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="webUrl">Website URL *</label>
+            <input
+              type="url"
+              class="form-control"
+              id="webUrl"
+              formControlName="web_url"
+              placeholder="http://example.com"
+              [class.is-invalid]="organizationForm.get('web_url')?.touched && organizationForm.get('web_url')?.invalid"/>
+            <!-- <div *ngIf="organizationForm.get('web_url')?.touched && organizationForm.get('web_url')?.invalid" class="invalid-feedback">
+              Please provide a valid URL (e.g., http://example.com)
+            </div> -->
+          </div>
+          <p style="font-size: 13px;">Provide the correct URL (e.g., http://example.com)</p>
+        </div>
+      </div>
+
+
+
+      <div class="row" *ngIf="!isOthers">
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="category_id">Main Category *</label>
+              <select id="category_id" formControlName="category_id" class="form-control" [class.is-invalid]="organizationForm.get('category_id')?.touched && organizationForm.get('category_id')?.invalid" required>
+                <option value="" disabled selected>Select a Main Category </option>
+                <option *ngFor="let category of mainCategory" [value]="category.value" >
+                  {{ category.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" >
+              <label for="sub_category_id">Category *</label>
+              <select id="sub_category_id" formControlName="sub_category_id" class="form-control" [class.is-invalid]="organizationForm.get('sub_category_id')?.touched && organizationForm.get('sub_category_id')?.invalid" required >
+                <option value="" disabled selected>Select a  Category </option>
+                <option *ngFor="let subcategory of subcategories" [value]="subcategory.value">
+                  {{ subcategory.label }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+      </div>
+    <div class="row" *ngIf="isOthers">
+      <div class="col-md-12">
+          <div class="form-group">
+            <label for="category">Main Category:</label>
+            <select id="category" formControlName="category_id" class="form-control" [class.is-invalid]="organizationForm.get('category_id')?.touched && organizationForm.get('category_id')?.invalid" required>
+              <option value="" disabled selected>Select a Main Category </option>
+              <option *ngFor="let category of mainCategory" [value]="category.value" >
+                {{ category.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+    </div>
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="location"> Enter the correct Location *</label>
+            <textarea class="form-control" id="location" formControlName="location" placeholder="Enter the Location" rows="4" [class.is-invalid]="organizationForm.get('location')?.touched && organizationForm.get('location')?.invalid"></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="orgDetail">Organization Details *</label>
+            <textarea class="form-control" id="orgDetail" formControlName="org_detail" placeholder="Detailed information about the Organization" rows="4" [class.is-invalid]="organizationForm.get('org_detail')?.touched && organizationForm.get('org_detail')?.invalid"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="mission">Mission *</label>
+            <textarea class="form-control" id="mission" formControlName="mission" placeholder="Enter the Mission of the Organization" rows="4" [class.is-invalid]="organizationForm.get('mission')?.touched && organizationForm.get('mission')?.invalid"></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="organizationMembers">Organization Members *</label>
+            <textarea class="form-control" id="organizationMembers" formControlName="organization_members" placeholder="Enter Organization Members" rows="4" [class.is-invalid]="organizationForm.get('organization_members')?.touched && organizationForm.get('organization_members')?.invalid"></textarea>
+          </div>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="country">Continent *</label>
+              <select class="form-control" id="continent" formControlName="continent" [class.is-invalid]="organizationForm.get('continent')?.touched && organizationForm.get('continent')?.invalid">
+                <option *ngFor="let option of ContinentOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="country">Country *</label>
+              <select class="form-control" id="country" formControlName="country" [class.is-invalid]="organizationForm.get('country')?.touched && organizationForm.get('country')?.invalid">
+                <option *ngFor="let option of CountryOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="state">State *</label>
+              <select class="form-control" id="state" formControlName="state" [class.is-invalid]="organizationForm.get('state')?.touched && organizationForm.get('state')?.invalid">
+                <option *ngFor="let option of StateOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="district">District *</label>
+              <select class="form-control" id="district" formControlName="object_id" [class.is-invalid]="organizationForm.get('object_id')?.touched && organizationForm.get('object_id')?.invalid">
+                <option *ngFor="let option of DistrictOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </div>
+          </div> 
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-2">
+            <label for="orgImages" class="form-label">Upload Organization Images <span style="color: red;">*</span></label>
+            <nz-upload nzListType="picture-card" 
+                       [(nzFileList)]="orgImageFileList"
+                       [nzShowButton]="orgImageFileList.length < 1" 
+                       (nzChange)="handleOrgImageChange($event)"
+                       [nzAccept]="'image/*'"     
+                       [class.is-invalid]="organizationForm.get('org_images')?.touched && organizationForm.get('org_images')?.invalid">
+              <div>
+                <i nz-icon nzType="plus"></i>
+                Upload Image
+              </div>
+            </nz-upload>
+            <div *ngIf="organizationForm.get('org_images')?.touched && organizationForm.get('org_images')?.invalid" class="invalid-feedback">
+              Image is required
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-2">
+            <label for="orgLogo" class="form-label">Upload Organization Logo <span style="color: red;">*</span></label>
+             <nz-upload 
+              nzListType="picture-card" 
+              [nzShowButton]="orgLogoFileList.length < 1" 
+              (nzChange)="handleOrgLogoChange($event)"
+              [nzAccept]="'image/*'" 
+              [class.is-invalid]="organizationForm.get('org_logo')?.touched && organizationForm.get('org_logo')?.invalid"
+              [nzAction]="''"> 
+            <div>
+              <i nz-icon nzType="plus"></i>
+              Upload Logo
+            </div>
+          </nz-upload>
+
+
+            <div *ngIf="organizationForm.get('org_logo')?.touched && organizationForm.get('org_logo')?.invalid" class="invalid-feedback">
+              Logo is required
+            </div>
+          </div>
+
+        </div>
+
+
+      <div class="row">
+        <div class="text-center">
+          <button type="submit" class="btn" style="background-color: orange;" [disabled]="formDisabled">Submit</button>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="text-center">
+            <button type="submit" class="btn" style="background-color: orange;" [disabled]="formDisabled">
+                Submit
+            </button>
+
+        </div>
+    </div> -->
+    <!-- <div class="row">
+      <div class="text-center">
+          <button type="submit" class="btn" style="background-color: orange;" [disabled]="formDisabled || loading">
+              <ng-container *ngIf="!loading; else loadingTemplate">
+                  Submit
+              </ng-container>
+              <ng-template #loadingTemplate>
+                  <div class="spinner-border"></div> Loading...
+              </ng-template>
+          </button>
+      </div>
+  </div> -->
+
+    </form>
+
+    </ng-template>
+
+
+
+    <ng-template [ngIf]="displayName === 'submission'">
+
+      <div class="container mb-5" style="margin-top: 100px;">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9">
+                <div class="row align-items-center mb-5">
+                    <div class="col-4 text-end">
+                        <img
+                        [src]="organization.org_logo && organization.org_logo !== 'data not found' ? 'data:image/jpeg;base64,' +  organization.org_logo : '../../assets/images/noImageDataImage.jpg'"
+                        class="img-fluid rounded-circle"
+                        style="width: 100px; height: 100px; object-fit: fill;" alt="Organization Logo">
+                    </div>
+                    <div class="col-8">
+                        <h6 class="text-start" style="color: orange;">{{ organization.organization_name }}</h6>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6 d-flex justify-content-center align-items-start mb-4 mb-md-0">
+                        <div class="image-container">
+                            <img
+                                [src]="organization.org_images && organization.org_images !== 'data not found' ? 'data:image/jpeg;base64,' +  organization.org_images : '../../assets/images/noImageDataImage.jpg'"
+                                class="img-fluid rounded"
+                                style="height: auto; max-height: 300px; object-fit: cover;" alt="Organization Image">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="details mt-4 mt-md-0">
+                            <div class="detail mb-3">
+                                <span class="detail-label"><b>Name:</b></span> {{ organization.organization_name }}
+                            </div>
+                            <div class="detail mb-3">
+                                <span class="detail-label"><b>Chairman:</b></span> {{ organization.chairman }}
+                            </div>
+                            <div class="detail mb-3">
+                                <span class="detail-label"><b>Registration Id:</b></span> {{ organization.reg_id }}
+                            </div>
+                            <div class="detail mb-3">
+                                <span class="detail-label"><b>Established By:</b></span> {{ organization.est_by }}
+                            </div>
+                            <div class="detail mb-3">
+                                <span class="detail-label"><b>Location:</b></span> {{ organization.location }}
+                            </div>
+                            <div class="detail mb-3">
+                                <span class="detail-label"><b>Organization Members:</b></span> {{ organization.organization_members }}
+                            </div>
+                            <div class="detail mb-3">
+                                <span class="detail-label"><b>Website:</b></span>
+                                <a [href]="organization.web_url" target="_blank">{{ organization.web_url }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                <div class="detail mb-3">
+                    <span class="detail-label"><b>Mission:</b></span> {{ organization.mission }}
+                </div>
+
+                <div class="detail mb-3">
+                    <span class="detail-label"><b>Organization Details:</b></span> {{ organization.org_detail }}
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-2 mt-5 d-none d-md-block">
+                <div class="image-container" style="position: relative;">
+                    <img src="../../assets/images/saynotoplastic.webp"
+                         class="img-fluid"
+                         style="height: 600px; width: 100%; object-fit: fill;"
+                         alt="Ad Space" id="banner-image">
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!organization" class="col-12">
+            <p class="text-center">No organization details available.</p>
+        </div>
+    </div>
+    </ng-template>
+
+
+
+
+
+  </div>
+</div>
+
+

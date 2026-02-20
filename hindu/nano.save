@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    
+    # Specify your domain names or IP address
+    server_name thehindusworld.com www.thehindusworld.com 74.225.213.111;
+    
+    # Set the root to the directory where your Angular build files are located
+    root /home/root1/hindu_world_fe/hindu/browser;
+    
+    # The default index file to serve
+    index index.html;
+
+    location / {
+        # Try to serve static files, otherwise fall back to index.html (for Angular routing)
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Optional: Additional settings for error handling or logging can be added here
+    error_page 404 /index.html;
+}

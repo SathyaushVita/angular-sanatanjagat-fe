@@ -1,0 +1,133 @@
+
+<div class="container mt-5 mb-5">
+    <div class="row" style="margin-top: 100px;">
+
+      <div *ngIf="errorMessage" class="col-12 col-md-9 alert alert-danger" style="margin-top: 50px; height: 70vh;background-color: white;">
+        <strong></strong> {{ errorMessage }}
+      </div>
+      
+      
+
+
+        <div class="col-md-10" *ngFor="let eventdata of eventdata">
+            <!-- <h4 class="mb-5 text-center">Detailed View of {{ eventdata.name }}</h4> -->
+            <div class="row align-items-center mb-5">
+              <div class="col text-center">
+                  <h4>Detailed View of {{ eventdata.name }}</h4>
+              </div>          
+              <div class="col-auto">
+                <button class="btn btn-light" (click)="sharegetbytemple(eventdata)" style="font-size: 20px">
+                  <i class="fas fa-share-alt"></i>
+                </button>
+              </div>
+
+          </div>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div class="image-container mb-5">
+                        <a >
+                            <img [src]="eventdata.image_location[0] ? eventdata.image_location[0] : 'assets/ohm.jpg'"
+                                 alt="image"
+                                 class="img-fluid rounded"
+                                 style="height:400px;width:500px;max-width:100%;"
+                                 (error)="handleImageError($event)">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="details" style="margin-top: 50px;">
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Name:</b></span> {{ eventdata.name }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Address:</b></span> {{ eventdata.address }}
+                        </div>
+                        <!-- <div class="detail mb-3">
+                          <span class="detail-label"><b>Map Location:</b></span>
+                          <a href="{{ eventdata.map_location }}" target="_blank">{{ eventdata.map_location }}</a>
+                      </div> -->
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Start Date:</b></span> {{ eventdata.start_date }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>End Date:</b></span> {{ eventdata.end_date }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Start Time:</b></span> {{ eventdata.start_time }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>End Time:</b></span> {{ eventdata.end_time }}
+                        </div>
+                        <!-- <div class="detail">
+                            <span class="detail-label"><b>Map Location:</b></span>
+                            <a (click)="openMap(eventdata.map_location)" href="Event Map Location">Event Map Location</a>
+                        </div> -->
+
+
+                        <div class="detail">
+                          <span class="detail-label"><b>Map Location:</b></span>
+                          <a 
+                              [href]="eventdata.map_location" 
+                              target="_blank" 
+                              (click)="openMap(eventdata.map_location)">
+                              Event Map Location
+                          </a>
+                      </div>
+                      
+
+                    </div>
+                </div>
+                <div class="detail mb-3">
+                    <span class="detail-label"><b>Description:</b></span> {{ eventdata.desc }}
+                </div>
+            </div>
+
+
+
+            <div class=" my-y" [formGroup]="commentform">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Comments</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <textarea class="form-control" formControlName="body" placeholder="Add a comment..."  rows="3"></textarea>
+                      <button class="btn btn-primary mt-2" (click)="onSubmit()">Post Comment</button>
+                    </div>
+
+                    <div *ngFor="let comment of eventdata.comments" class="card mb-2">
+                      <div class="card-body">
+
+
+                          <div class="d-flex align-items-center ">
+                            <img src="../../assets/images/profile1.webp" alt="Profile" class="rounded-circle me-2" width="30" height="30">
+
+                            <strong>{{comment?.user?.name}}</strong>
+                          </div>
+                          <p class="card-text ms-4" style="font-size: 16px;">
+                            {{ comment.body }}
+                          </p>
+
+
+
+
+                        <div class="d-flex justify-content-between">
+                          <!-- <small class="text-muted">{{ comment.date | date: 'short' }}</small> -->
+                          <!-- <button class="btn btn-link btn-sm text-danger" >Delete</button> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-3 col-lg-2 mt-5 d-none d-md-block">
+            <div class="image-container" style="position: relative;">
+                <img src="../../assets/images/saynotoplastic.webp"
+                     class="img-fluid"
+                     style="height: 600px; width: 100%; object-fit: fill;"
+                     alt="Ad Space" id="banner-image">
+            </div>
+        </div>
+    </div>
+</div>

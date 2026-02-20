@@ -1,0 +1,132 @@
+    <div class="container mt-5 mb-5">
+    <div class="row justify-content-center" style="margin-top: 100px;">
+
+    <div *ngIf="errorMessage" class="col-12 col-md-9 alert alert-danger mt-5" style="background-color: white;">
+      <strong></strong> {{ errorMessage }}
+    </div>
+
+
+    
+
+        <div class="col-12 col-md-9" *ngIf="organization">
+          <div class="d-flex align-items-center justify-content-between mb-5 mt-5">
+            <h4 class="mb-0 mx-auto" style="color: orange;">{{ organization.name }}</h4>
+            <button class="btn btn-light" style="font-size: 20px;" (click)="getbytraining(organization)">
+              <i class="fas fa-share-alt"></i>
+            </button>
+          </div>
+
+
+
+            <div class="row">
+                <div class="col-12 col-md-6 d-flex justify-content-center align-items-start">
+                    <div class="image-container mb-5">
+                        <img [src]="organization.image ?  organization.image : '../../assets/images/noImageDataImage.jpg'"
+                             alt="Organization Image"
+                             class="img-fluid rounded"
+                             style="height: 300px; width: 100%; object-fit: fill;">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="details">
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Training Name:</b></span> {{ organization.name }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Trainer Name:</b></span> {{ organization.trainer_name }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Contact Details:</b></span> {{ organization.contact_details }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Training Link:</b></span>
+                            <a href="{{ organization.training_link }}" target="_blank">{{ organization.training_link }}</a>
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Start Date:</b></span> {{ organization.start_date }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>End Date:</b></span> {{ organization.end_date }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Training Type:</b></span> {{ organization.training_type }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="details">
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Location:</b></span> {{ organization.location }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Description:</b></span> {{ organization.desc }}
+                        </div>
+                        <div class="detail mb-3">
+                            <span class="detail-label"><b>Video:</b></span>
+                             <video
+                            *ngIf="organization.video"
+                            [src]="getVideoUrl()"
+                            controls
+                            style="width:100%; height: 450px;">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+
+                        
+
+
+                        <!-- <div class="detail mb-3">
+                          <span class="detail-label"><b>Video:</b></span>
+                            <div>
+                              <p class="video-name text-center" *ngIf="organization.videoName">{{ organization.videoName }}</p>
+                                <div class="d-flex justify-content-center">
+                                    <video
+                                      *ngIf="organization.video"
+                                      [src]="getVideoUrl()"
+                                      controls
+                                      style="width:100%; height: 450px;">
+                                      Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        
+                          
+                          
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-2 d-none d-md-block mt-5">
+            <div class="image-container mt-5 mt-md-0" style="position: relative;">
+                <img src="../../assets/images/saynotoplastic.webp"
+                     class="img-fluid "
+                     style="height: 600px; width: 100%; object-fit: fill;"
+                     alt="Ad Space" id="banner-image">
+            </div>
+        </div>
+
+        <!-- <div *ngIf="!organization" class="col-12">
+            <p class="text-center">No Training details available.</p>
+        </div> -->
+    </div>
+
+
+
+</div>
+
+
+
+
+

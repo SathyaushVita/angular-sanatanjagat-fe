@@ -1,0 +1,70 @@
+
+<div class="container p-4" style="margin: 0 auto; background-color: #f2f2f2;">
+  <div class="card-body">
+      <div class="col-md-12">
+        <h6 class="text-center card-title">Member Registration</h6>
+          <form [formGroup]="memberform" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="Surname">Surname</label>
+                  <input type="text" class="form-control" id="Surname" formControlName="surname" placeholder="Enter your Surname" [class.is-invalid]="memberform.get('surname')?.touched && memberform.get('surname')?.invalid" required>
+              </div>
+                  <div class="form-group col-md-6">
+                      <label for="full_name">Name</label>
+                      <input type="text" class="form-control" id="full_name" formControlName="full_name" placeholder="Enter your Name"  [class.is-invalid]="memberform.get('full_name')?.touched && memberform.get('full_name')?.invalid" required>
+                  </div>
+
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="father_name">Father's Name</label>
+                  <input type="text" class="form-control" id="father_name" formControlName="father_name" placeholder="Enter your Father's Name"  [class.is-invalid]="memberform.get('father_name')?.touched && memberform.get('father_name')?.invalid" required>
+              </div>
+                  <div class="form-group col-md-6">
+                      <label for="gender">Gender</label>
+                      <select class="form-control" id="gender" formControlName="gender" placeholder="Select your gender"  [class.is-invalid]="memberform.get('gender')?.touched && memberform.get('gender')?.invalid" required>
+                          <option value="" disabled selected>Select your Gender</option>
+                          <option value="MALE">Male</option>
+                          <option value="FEMALE">Female</option>
+                          <option value="OTHER">Other</option>
+                      </select>
+                  </div>
+                  <!-- <div class="form-group col-md-6">
+                      <label for="contact_number">Contact Number</label>
+                      <input type="tel" class="form-control" id="contact_number" formControlName="contact_number" placeholder="Enter your Contact Number"  [class.is-invalid]="memberform.get('contact_number')?.touched && memberform.get('contact_number')?.invalid" required>
+
+                  </div> -->
+
+
+                  <div class="form-group col-md-6">
+                    <label for="contact_number">Contact Number</label>
+                    <input type="tel" class="form-control" id="contact_number" formControlName="contact_number" placeholder="Enter your Contact Number"  [class.is-invalid]="memberform.get('contact_number')?.touched && memberform.get('contact_number')?.invalid" required>
+
+                    <div *ngIf="memberform.controls['contact_number'].invalid && memberform.controls['contact_number'].touched" class="text-danger">
+                      
+                      <div *ngIf="memberform.controls['contact_number'].hasError('maxLength')">
+                        Contact Number cannot be more than 10 digits.
+                      </div>
+                      <div *ngIf="memberform.controls['contact_number'].hasError('pattern')">
+                        Contact Number must be a 10-digit number.
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter your Email"  [class.is-invalid]="memberform.get('email')?.touched && memberform.get('email')?.invalid" required>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

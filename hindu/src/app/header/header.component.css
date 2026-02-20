@@ -1,0 +1,22 @@
+.sidebar-logo {
+    height: 60px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  /* @media (min-width: 930px) and (max-width: 1199px) {
+    .navbar-nav .nav-link {
+      font-size: 10px;
+    }
+  } */
+
+@media (max-width: 990px) {
+  .nav-item-container {
+    display: block !important;
+  }
+}
+
+.nav-link.active {
+  color:orange ;
+  border-radius: 5px;
+}
